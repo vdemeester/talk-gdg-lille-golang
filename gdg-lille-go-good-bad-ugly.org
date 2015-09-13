@@ -21,20 +21,32 @@
 
 #+FAVICON: images/golang.ico
 #+ICON: images/golang-image1.png
-#+HASHTAG: Hash tag is in here
+#+HASHTAG: #gdglille-golang
 
-** Me
+** /Whoami
 
-blabla
+#+BEGIN_HTML
+<span style="text-align: right;float:right; display: block; width: 50%;">Docker contributor<br/>certified trainer<br><span style="font-size: 2em;">🐳</span></span>
+#+END_HTML
 
-* Golang
+#+NAME:   fig:me-contribs-fun
+[[./images/me-contribs-fun.png]]
+
+
+- I'm a developer, devops, craftsman — /I 💓 & work @Zenika/
+- I 💓 GNU/Linux, Docker & GNU/Emacs
+- I 💓 Free-software !
+- I 💓 Java, *Go*, Python and much more
+- And I 💓 unicode, 🚴 & 🚶
+
+* Golang 🐹
   :PROPERTIES:
   :SLIDE:    segue dark quote
   :ASIDE:    right bottom
   :ARTICLE:  flexbox vleft auto-fadein
   :END:
   Présentation rapide
-* Le bon
+* Le bon 😆
   :PROPERTIES:
   :SLIDE:    segue dark quote
   :ASIDE:    right bottom
@@ -83,7 +95,7 @@ This slide has =:ARTICLE:  large= property, so has *large* content.
 ** TODO Et plus si affinité
    Cross compilation
 
-* La brute
+* La brute 😓
   :PROPERTIES:
   :SLIDE:    segue dark quote
   :ASIDE:    right bottom
@@ -99,7 +111,7 @@ This slide has =:ARTICLE:  large= property, so has *large* content.
 ** TODO Exceptions
 ** TODO Lint
 ** TODO iota ?
-* Le truant
+* Le truant 😨
   :PROPERTIES:
   :SLIDE:    segue dark quote
   :ASIDE:    right bottom
@@ -109,9 +121,10 @@ This slide has =:ARTICLE:  large= property, so has *large* content.
 <code style="background: inherit; color: inherit;">ヾ(×× ) ﾂ</code>
 #+END_HTML
 « The ugly »
-** TODO Vendoring
+** TODO Operateurs
 ** TODO Immutability
-* Thank You ˊ・ω・ˋ
+** TODO Vendoring
+* Thank You 🐸
 
 :PROPERTIES:
 :SLIDE: thank-you-slide segue
@@ -122,3 +135,11 @@ This slide has =:ARTICLE:  large= property, so has *large* content.
 * Footnotes
 
 [fn:1] Footnote is in here!
+
+* Notes                                                                         :noexport:
+- http://blog.carlsensei.com/post/42828735125
+- https://news.ycombinator.com/item?id=7668567
+- https://www.scriptrock.com/blog/our-experience-with-golang
+- https://github.com/golang/go/wiki/Iota
+- https://www.youtube.com/watch?v=eKAg1DtC9jY
+- https://docs.google.com/presentation/d/1dRFLEtwmdoBSjj-WWe3CUAbyOkaQIUPonTN8_3GLkso/edit#slide=id.p4
