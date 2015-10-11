@@ -2,7 +2,7 @@
 <html>
 <head>
 <title></title>
-<!-- 2015-10-11 Sun 14:39 -->
+<!-- 2015-10-11 Sun 15:04 -->
 <meta  charset="utf-8" />
 <meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
 <meta  name="generator" content="Org-mode with org-ioslide" />
@@ -278,7 +278,7 @@ type MyFloat float64
 </slide>
 <slide id="sec-2-1"  >
 <hgroup class="">
-       <h2 class=" ">Learning curve</h2>
+       <h2 class=" ">Learning curve 😝</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-2-1">
@@ -385,11 +385,11 @@ Variables, constants, methods, structure ont 2 <i>états</i> :
 <div class="org-src-container">
 
 <pre class="prettyprint" data-lang="go">
-func myMethod() string {
-        return "On me voit pas... 😖"
+func <b>myMethod()</b> string {
+        return "On me voit pas... <b>😖</b>"
 }
 
-var myVar = "On me voit 😆"
+var <b>MyVar</b> = "On me voit <b>😆</b>"
 </pre>
 
 </div>
@@ -442,7 +442,7 @@ func main() {
 </slide>
 <slide id="sec-2-6"  >
 <hgroup class="">
-       <h2 class=" ">Concurrency — channels</h2>
+       <h2 class=" ">Concurrency — channels ␥</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-2-6">
@@ -455,16 +455,16 @@ Channels are a typed conduit through which you can send and receive values with 
 <div class="org-src-container">
 
 <pre class="prettyprint" data-lang="go">
-waitForMe := make(chan bool)
+<b>waitForMe := make(chan bool)</b>
 
 go func() {
-        fmt.Println("I'm here ! 😙")
+        fmt.Println("I'm here ! <b>😙</b>")
         <b>waitForMe &lt;- true</b>
 }()
 
-fmt.Println("I'm waiting for you… 😒")
+fmt.Println("I'm waiting for you… <b>😒</b>")
 <b>&lt;- waitForMe</b>
-fmt.Println("Finally 🙌")
+fmt.Println("Finally <b>🙌</b>")
 </pre>
 
 </div>
@@ -477,7 +477,7 @@ fmt.Println("Finally 🙌")
 </slide>
 <slide id="sec-2-7"  >
 <hgroup class="">
-       <h2 class=" ">Concurrency - <code>select</code></h2>
+       <h2 class=" ">Concurrency - <code>select</code> ⌥</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-2-7">
@@ -520,10 +520,10 @@ go func() {
 <pre class="prettyprint" data-lang="go">
 func <b>Test</b>TimeConsuming(<b>t *testing.T</b>) {
         if testing.Short() {
-                t.Skip("skipping test in short mode.")
+                <b>t.Skip</b>("skipping test in short mode.")
         }
         // […]
-        t.Fatalf("hello %s", "world")
+        <b>t.Fatalf</b>("hello %s", "world")
 }
 </pre>
 
@@ -590,7 +590,7 @@ ok      github.com/vdemeester/dumb       3.084s
 </slide>
 <slide id="sec-2-10"  >
 <hgroup class="">
-       <h2 class=" ">Tooling</h2>
+       <h2 class=" ">Tooling 🛠</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-2-10">
@@ -703,7 +703,7 @@ import (
 </slide>
 <slide id="sec-3" class=" segue dark quote nobackground" style="background-image: url(nil)">
 <aside class="gdbar right bottom"><img src="images/golang-image1.png"></aside><hgroup class="">
-       <h2 class=" ">La brute 😓</h2>
+       <h2 class=" ">La brute 😕</h2>
        <h3></h3>
        </hgroup>
 <article class="flexbox vleft auto-fadein" id="text-3">
@@ -774,7 +774,7 @@ new MyGenericObject&lt;ASeriailzableObject&gt;();
 
 
 <ul>
-<li>Idées : <i>« You don't really need to debug if you log enough »</i>
+<li>Idée : <i>« You don't really need to debug if you log enough »</i>
 </li>
 </ul>
 
@@ -787,7 +787,7 @@ new MyGenericObject&lt;ASeriailzableObject&gt;();
 </slide>
 <slide id="sec-3-3"  >
 <hgroup class="">
-       <h2 class=" ">Exceptions</h2>
+       <h2 class=" ">Exceptions 💣</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-3-3">
@@ -889,7 +889,7 @@ func IDoWhatMyNameSays(input string) string {
 </slide>
 <slide id="sec-4-1"  >
 <hgroup class="">
-       <h2 class=" ">Named returns</h2>
+       <h2 class=" ">Named returns 🙈</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-4-1">
@@ -926,7 +926,7 @@ func pullImageIfNotExist(image string) (<b>err error</b>) {
 </slide>
 <slide id="sec-4-2"  >
 <hgroup class="">
-       <h2 class=" ">Immutability</h2>
+       <h2 class=" ">Immutability 😧</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-4-2">
@@ -966,7 +966,7 @@ Laisse pas traîner ton fils… Si tu veux pas qu'il glisse…
 </slide>
 <slide id="sec-4-3"  >
 <hgroup class="">
-       <h2 class=" ">Dependencies versions …</h2>
+       <h2 class=" ">Dependencies versions … 😓</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-4-3">
@@ -1009,7 +1009,7 @@ better."
 </slide>
 <slide id="sec-4-4"  >
 <hgroup class="">
-       <h2 class=" ">… to Vendoring</h2>
+       <h2 class=" ">… to Vendoring 😤</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-4-4">

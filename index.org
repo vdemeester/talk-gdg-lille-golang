@@ -21,7 +21,7 @@
 
 #+FAVICON: images/golang.ico
 #+ICON: images/golang-image1.png
-#+HASHTAG: #gdglille-golang
+#+HASHTAG: #gdglille-golang #ZenikaIt #ZenikaNord
 
 ** /Whoami
 
@@ -150,7 +150,7 @@
 <code style="background: inherit; color: inherit;">｡◕‿◕｡</code>
 #+END_HTML
 « The good »
-** Learning curve
+** Learning curve 😝
 
    #+BEGIN_CENTER
    [[file:images/learning-curves.png]]
@@ -196,11 +196,11 @@ func b() {
 - Non-exportées: *camelCase*, invisible à l'extrérieur du package
 
 #+BEGIN_SRC go
-  func myMethod() string {
-          return "On me voit pas... 😖"
+  func <b>myMethod()</b> string {
+          return "On me voit pas... <b>😖</b>"
   }
 
-  var myVar = "On me voit 😆"
+  var <b>MyVar</b> = "On me voit <b>😆</b>"
 #+END_SRC
 
 Pas de notion de privé (visible uniquement sur le fichier)
@@ -225,26 +225,26 @@ Pas de notion de privé (visible uniquement sur le fichier)
   }
    #+END_SRC
 
-** Concurrency — channels
+** Concurrency — channels ␥
 
    #+BEGIN_QUOTE
    Channels are a typed conduit through which you can send and receive values with the channel operator, =<-=.
    #+END_QUOTE
 
    #+BEGIN_SRC go
-  waitForMe := make(chan bool)
+  <b>waitForMe := make(chan bool)</b>
 
   go func() {
-          fmt.Println("I'm here ! 😙")
+          fmt.Println("I'm here ! <b>😙</b>")
           <b>waitForMe <- true</b>
   }()
 
-  fmt.Println("I'm waiting for you… 😒")
+  fmt.Println("I'm waiting for you… <b>😒</b>")
   <b><- waitForMe</b>
-  fmt.Println("Finally 🙌")
+  fmt.Println("Finally <b>🙌</b>")
    #+END_SRC
 
-** Concurrency - =select=
+** Concurrency - =select= ⌥
 
 #+BEGIN_SRC go
   done := make(chan error)
@@ -269,10 +269,10 @@ Pas de notion de privé (visible uniquement sur le fichier)
    #+BEGIN_SRC go
      func <b>Test</b>TimeConsuming(<b>t *testing.T</b>) {
              if testing.Short() {
-                     t.Skip("skipping test in short mode.")
+                     <b>t.Skip</b>("skipping test in short mode.")
              }
              // […]
-             t.Fatalf("hello %s", "world")
+             <b>t.Fatalf</b>("hello %s", "world")
      }
    #+END_SRC
 
@@ -305,7 +305,7 @@ BenchmarkHello    10000000    282 ns/op
 ok      github.com/vdemeester/dumb       3.084s
    #+END_SRC
 
-** Tooling
+** Tooling 🛠
 
 - =godoc= : "extracts and generates documentation for Go programs"
 - =vet= : "examines Go source code and reports suspicious constructs"
@@ -351,7 +351,7 @@ env GOOS=linux GOARCH=arm go build -v github.com/constabulary/gb/cmd/gb
 #+END_SRC
 
 
-* La brute 😓
+* La brute 😕
   :PROPERTIES:
   :SLIDE:    segue dark quote
   :ASIDE:    right bottom
@@ -389,16 +389,16 @@ env GOOS=linux GOARCH=arm go build -v github.com/constabulary/gb/cmd/gb
   - =delve= le nouveau ([[https://github.com/derekparker/delve][github]])
 
 
-- Idées : /« You don't really need to debug if you log enough »/
+- Idée : /« You don't really need to debug if you log enough »/
 
 
-** Exceptions
+** Exceptions 💣
 
 #+BEGIN_QUOTE
 Go solves the exception problem by not having exceptions.
 #+END_QUOTE
 
-- =error= indicates to the caller that this method could go wrong
+- =error= indicates to the caller that this method could go wrong.
 
 #+BEGIN_SRC go
 // a whole lot of "err" in returns (to handle or ignore in the caller)
@@ -444,7 +444,7 @@ panic("inconceivable")
 <code style="background: inherit; color: inherit;">ヾ(×× ) ﾂ</code>
 #+END_HTML
 « The ugly »
-** Named returns
+** Named returns 🙈
 
 #+BEGIN_QUOTE
 variable shadowing on return parameters is sooo easy to get wrong.
@@ -465,7 +465,7 @@ variable shadowing on return parameters is sooo easy to get wrong.
   }
 #+END_SRC
 
-** Immutability
+** Immutability 😧
 
 - /presque/ tout est mutable
 - pas de =built-in= pour dire « hey, ce truc est immutable »
@@ -485,7 +485,7 @@ variable shadowing on return parameters is sooo easy to get wrong.
 Laisse pas traîner ton fils… Si tu veux pas qu'il glisse…
 #+END_QUOTE
 
-** Dependencies versions …
+** Dependencies versions … 😓
 
 - =go get= is cool but… 
 
@@ -507,7 +507,7 @@ better."
     -- David Hinkes, Go+
 #+END_QUOTE
 
-** … to Vendoring
+** … to Vendoring 😤
 
 #+BEGIN_QUOTE
 "If you're using an externally supplied package and worry that it
