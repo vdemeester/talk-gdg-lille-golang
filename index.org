@@ -25,12 +25,12 @@
 
 ** /Whoami
 
-#+BEGIN_HTML
-<span style="text-align: right;float:right; display: block; width: 50%;">Docker maintainer<br/>certified trainer<br><span style="font-size: 2em;">🐳</span></span>
-#+END_HTML
+   #+BEGIN_HTML
+   <span style="text-align: right;float:right; display: block; width: 50%;">Docker maintainer<br/>certified trainer<br><span style="font-size: 2em;">🐳</span></span>
+   #+END_HTML
 
-#+NAME:   fig:me-contribs-fun
-[[./images/me-contribs-fun.png]]
+   #+NAME:   fig:me-contribs-fun
+   [[./images/me-contribs-fun.png]]
 
 
 - I'm a developer, devops, craftsman — /I 💓 & work @Zenika/
@@ -46,6 +46,100 @@
   :ARTICLE:  flexbox vleft auto-fadein
   :END:
   Présentation rapide
+
+** En un mot
+
+- simple
+- strongly typed
+- concurrent
+- compilé
+  - compilation statique possible =\o/=
+
+
+- stylistically nice
+  - /« les goûts et les couleurs »/
+- opiniated
+
+** En quelques lignes de code (1/4)
+
+#+BEGIN_SRC go
+  package main
+
+  import "fmt"
+
+  func <b>swap(x, y string)</b> (<b>string, string</b>) {
+          for _, elt := range []string{"a", "b"} {
+                  fmt.Println(elt)
+          }
+          return y, x
+  }
+
+  func main() {
+          <b>a, b := swap("hello", "world")</b>
+          fmt.Println(a, b)
+  }
+#+END_SRC
+
+** En quelques lignes de code (2/4)
+
+#+BEGIN_SRC go
+  type Vertex struct {
+          X int
+          Y int
+  }
+
+  <b>func (v Vertex) PrintCoords()</b> {
+          fmt.Printf("(%s,%s)", v.X, v.Y)
+  }
+
+  func main() {
+          v := Vertex{1, 2}
+          <b>v.PrintCoords()</b>
+          v.X = 4
+          fmt.Println(v.X)
+  }
+#+END_SRC
+
+** En quelques lignes de code (3/4)
+
+#+BEGIN_SRC go
+  func adder() <b>func(int) int</b> {
+          sum := 0
+          <b>return func(x int) int {
+                  sum += x
+                  return sum
+          }</b>
+  }
+
+  func main() {
+          pos, neg := adder(), adder()
+          for i := 0; i < 10; i++ {
+                  fmt.Println(<b>pos(i)</b>, <b>neg(-2*i)</b>)
+          }
+  }
+#+END_SRC
+
+** En quelques lignes de code (4/4)
+
+#+BEGIN_SRC go
+  type Abser interface {
+          <b>Abs() float64</b>
+  }
+
+  type MyFloat float64
+
+  <b>func (f MyFloat) Abs() float64</b> {
+          if f < 0 {
+                  return float64(-f)
+          }
+          return float64(f)
+  }
+
+  <b>var f Abser</b>
+  // […]
+  <b>f.Abs()</b>
+#+END_SRC
+
 * Le bon 😆
   :PROPERTIES:
   :SLIDE:    segue dark quote
@@ -56,44 +150,206 @@
 <code style="background: inherit; color: inherit;">｡◕‿◕｡</code>
 #+END_HTML
 « The good »
-** TODO Learning curve
-** TODO Compilation time
-  :PROPERTIES:
-  :ARTICLE:  smaller
-  :END:
-This slide has =:ARTICLE:  smaller= property, so has *smaller* content.
-#+BEGIN_SRC org
-  :PROPERTIES:
-  :ARTICLE:  smaller
-  :END:
+** Learning curve
+
+   #+BEGIN_CENTER
+   [[file:images/learning-curves.png]]
+   #+END_CENTER
+
+** Defer
+   #+BEGIN_SRC go
+  <b>src, _ := os.Open(srcName)</b>
+  <b>defer src.Close()</b>
+  // Doing my stuff […]
+  return "something"
+   #+END_SRC
+
+   =defer= execution order : Last in, First out (=LIFO=)
+
+   #+BEGIN_SRC go
+func b() {
+    for i := 0; i < 4; i++ {
+        <b>defer fmt.Print(i)</b>
+    }
+}
+// Print 4 3 2 1 0
+   #+END_SRC
+
+
+** Garbage collection
+
+   #+BEGIN_QUOTE
+   We feel *it's critical to eliminate that programmer overhead*, and
+   advances in garbage collection technology in the last few years give
+   us confidence that we can implement it with low enough overhead and no
+   significant latency.
+   #+END_QUOTE
+
+   #+BEGIN_CENTER
+   [[file:images/golang-gc.png]]
+   #+END_CENTER
+
+** Exports
+
+   Variables, constants, methods, structure ont 2 /états/ :
+- Exportées: *CamelCase*, visible à l'extérieur du package
+- Non-exportées: *camelCase*, invisible à l'extrérieur du package
+
+#+BEGIN_SRC go
+  func myMethod() string {
+          return "On me voit pas... 😖"
+  }
+
+  var myVar = "On me voit 😆"
 #+END_SRC
-** TODO Defer
-  :PROPERTIES:
-  :ARTICLE:  larger
-  :END:
-This slide has =:ARTICLE:  larger= property, so has *larger* content.
-#+BEGIN_SRC org
-  :PROPERTIES:
-  :ARTICLE:  larger
-  :END:
+
+Pas de notion de privé (visible uniquement sur le fichier)
+
+** Concurrency
+
+   #+BEGIN_QUOTE
+   A goroutine is a lightweight thread managed by the Go runtime.
+   #+END_QUOTE
+
+   #+BEGIN_SRC go
+  func f(from string) {
+          fmt.Println(from, ":", i)
+  }
+
+  func main() {
+          <b>go f("goroutine")</b>
+          f("direct")
+          <b>go func(msg string)</b> {
+                  fmt.Println(msg)
+          }("going")
+  }
+   #+END_SRC
+
+** Concurrency — channels
+
+   #+BEGIN_QUOTE
+   Channels are a typed conduit through which you can send and receive values with the channel operator, =<-=.
+   #+END_QUOTE
+
+   #+BEGIN_SRC go
+  waitForMe := make(chan bool)
+
+  go func() {
+          fmt.Println("I'm here ! 😙")
+          <b>waitForMe <- true</b>
+  }()
+
+  fmt.Println("I'm waiting for you… 😒")
+  <b><- waitForMe</b>
+  fmt.Println("Finally 🙌")
+   #+END_SRC
+
+** Concurrency - =select=
+
+#+BEGIN_SRC go
+  done := make(chan error)
+  cmd := os.exec("super-long-command", "that", "might", "timeout")
+  go func() {
+          // And wait for it to exit in the goroutine :)
+          exitErr := cmd.Wait()
+          <b>done <- exitErr</b>
+  }()
+
+  <b>select</b> {
+  <b>case <-time.After(duration):</b>
+          cmd.Process.Kill()
+          break
+  <b>case err = <-done:</b>
+          break
+  }
 #+END_SRC
-** TODO Garbage collection
-  :PROPERTIES:
-  :ARTICLE:  large
-  :END:
-This slide has =:ARTICLE:  large= property, so has *large* content.
-#+BEGIN_SRC org
-  :PROPERTIES:
-  :ARTICLE:  larger
-  :END:
+
+** Testing =built-in= 💖
+
+   #+BEGIN_SRC go
+     func <b>Test</b>TimeConsuming(<b>t *testing.T</b>) {
+             if testing.Short() {
+                     t.Skip("skipping test in short mode.")
+             }
+             // […]
+             t.Fatalf("hello %s", "world")
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+$ go test
+PASS
+ok      _/home/vincent/src/docker/docker/pkg/stringutils        0.006s
+$ go test -cover
+PASS
+coverage: 96.5% of statements
+ok      _/home/vincent/src/docker/docker/pkg/stringutils        0.006s
+   #+END_SRC
+
+** Benchmark testing =built-in= 💕
+
+   Benchmark tests =built-in= également
+
+   #+BEGIN_SRC go
+     func <b>Benchmark</b>Hello(b *testing.B) {
+             for i := 0; i < b.N; i++ {
+                     fmt.Sprintf("hello")
+             }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+$ go test -bench=.
+PASS
+BenchmarkHello    10000000    282 ns/op
+ok      github.com/vdemeester/dumb       3.084s
+   #+END_SRC
+
+** Tooling
+
+- =godoc= : "extracts and generates documentation for Go programs"
+- =vet= : "examines Go source code and reports suspicious constructs"
+- =oracle= : "source analysis tool that answers questions about Go programs"
+- =golint= : "prints out style mistakes, is concerned with coding style"
+- =gofmt= : "reformats Go source code"
+- =generate= : "scanning for special comments in Go source code that identify general commands to run"
+- =gorename= : "performs precise type-safe renaming of identifiers"
+- =-race= & =racy= : "race detector"
+
+
+- et plus encore : =godef=, =gocode=, =impl=, …
+
+** Compilation
+
+- Compilation time
+- Cross compilation ( >= 1.5 )
+
+#+BEGIN_SRC sh
+env GOOS=linux GOARCH=arm go build -v github.com/constabulary/gb/cmd/gb
 #+END_SRC
-** TODO Exports
-** TODO Concurrency
-** TODO Testing <3
-** TODO Tooling
-** TODO Build tags
-** TODO Et plus si affinité
-   Cross compilation
+
+- Compilation flags
+
+#+BEGIN_SRC go
+// +build !windows
+#+END_SRC
+
+** Et plus si affinité
+
+- imports
+
+#+BEGIN_SRC go
+  import (
+          // build-in
+          "string"
+          "testing"
+
+          // fully-qualified
+          "github.com/foo/bar"
+          biz "mysuperdomain.io/foo/baz"
+  )
+#+END_SRC
+
 
 * La brute 😓
   :PROPERTIES:
@@ -105,12 +361,79 @@ This slide has =:ARTICLE:  large= property, so has *large* content.
 <code style="background: inherit; color: inherit;">¯\_(ツ)_/¯</code>
 #+END_HTML
 « The bad »
-** TODO Generics
-   Interface are enough
-** TODO Debugging
-** TODO Exceptions
-** TODO Lint
-** TODO iota ?
+** Generics
+
+   Golang ne dispose pas de /generics/.
+
+#+BEGIN_SRC java
+  public class MyGenericObject<T extends Serializable> {
+      // […]
+  }
+
+  new MyGenericObject<String>();
+  new MyGenericObject<ASeriailzableObject>();
+#+END_SRC
+
+- /« Interface are enough »/
+- =generate= peut permettre de /mimics/ les generics
+
+
+** Debugging
+:PROPERTIES:
+:ARTICLE:  larger
+:END:
+
+- Pas d'outils =built-in=
+- Outils qui /marchotte/
+  - =gdb= le vénérable
+  - =delve= le nouveau ([[https://github.com/derekparker/delve][github]])
+
+
+- Idées : /« You don't really need to debug if you log enough »/
+
+
+** Exceptions
+
+#+BEGIN_QUOTE
+Go solves the exception problem by not having exceptions.
+#+END_QUOTE
+
+- =error= indicates to the caller that this method could go wrong
+
+#+BEGIN_SRC go
+// a whole lot of "err" in returns (to handle or ignore in the caller)
+func Open(name string) (file *File, err error)
+#+END_SRC
+
+- =panic= always fatal to your program […] you never assume that your
+  caller can solve the problem ; =recover= regains control of a
+  panicking goroutine.
+
+#+BEGIN_SRC go
+panic("inconceivable")
+#+END_SRC
+
+** Lint — Opiniated, /maybe too much/ ?
+
+#+BEGIN_SRC go
+  // Doesn't pass golint
+  type a<b>Dns</b> struct{
+          <b>Id</b> int
+  }
+
+  // Passes golint
+  type a<b>DNS</b> struct{
+          <b>ID</b> int `json:"Id"`
+  }
+#+END_SRC
+
+#+BEGIN_SRC go
+  <b>// IDoWhatMyNameSays does what's his name says …</b>
+  func IDoWhatMyNameSays(input string) string {
+          // […]
+  }
+#+END_SRC
+
 * Le truant 😨
   :PROPERTIES:
   :SLIDE:    segue dark quote
@@ -121,10 +444,92 @@ This slide has =:ARTICLE:  large= property, so has *large* content.
 <code style="background: inherit; color: inherit;">ヾ(×× ) ﾂ</code>
 #+END_HTML
 « The ugly »
-** TODO Operateurs
-** TODO Immutability
-** TODO Vendoring
+** Named returns
+
+#+BEGIN_QUOTE
+variable shadowing on return parameters is sooo easy to get wrong.
+#+END_QUOTE
+
+#+BEGIN_SRC go
+  func pullImageIfNotExist(image string) (<b>err error</b>) {
+          if <b>err := imageExists(image)</b>; err != nil {
+                  pullCmd := exec.Command(dockerBinary, "pull", image)
+                  _, exitCode, <b>err := runCommandWithOutput(pullCmd)</b>
+
+
+                  if <b>err != nil</b> || exitCode != 0 {
+                          <b>err = fmt.Errorf("image %q wasn't found locally and it couldn't be pulled: %s", image, err)</b>
+                  }
+          }
+          return
+  }
+#+END_SRC
+
+** Immutability
+
+- /presque/ tout est mutable
+- pas de =built-in= pour dire « hey, ce truc est immutable »
+
+#+BEGIN_SRC go
+  func main() {
+          a := []string{"a", "b", "c", "d"}
+          b := a[:3] // ["b", "c", "d"]
+          c := append(b, "lol")
+          d := append(b, "woot")
+          fmt.Println(c) // [a b c woot]
+          fmt.Println(d) // [a b c woot]
+  }
+#+END_SRC
+
+#+BEGIN_QUOTE
+Laisse pas traîner ton fils… Si tu veux pas qu'il glisse…
+#+END_QUOTE
+
+** Dependencies versions …
+
+- =go get= is cool but… 
+
+#+BEGIN_SRC sh
+  $ go get -u github.com/docker/libkv
+  # git commit : 2cae37b
+  # […] Few days later
+  $ go get -u github.com/docker/libkv
+  # git  commit : 253a9ef
+  $ go build ./...
+  # oh noooeees it's broken 😱
+#+END_SRC
+
+#+BEGIN_QUOTE
+"I want to have reproducible builds on different computers at
+different times. This is currently problematic; let's make things
+better."
+
+    -- David Hinkes, Go+
+#+END_QUOTE
+
+** … to Vendoring
+
+#+BEGIN_QUOTE
+"If you're using an externally supplied package and worry that it
+might change in unexpected ways, the simplest solution is to copy it
+to your local repository. (*This is the approach Google takes
+internally.*) […]"
+
+    -- Go FAQ
+#+END_QUOTE
+
+- Tools
+  - =godep= (*Don't use it without vendoring.. /it's hell on earth/*)
+  - =glide=, =gb=, =name yours=, shell scripts, …
+- Go 1.5 experimental vendoring : =export GO15VENDOREXPERIMENT=1=
+
+#+BEGIN_SRC sh
+$ ls vendor/src
+github.com/ golang.org/
+#+END_SRC
+
 * Thank You 🐸
+
 
 :PROPERTIES:
 :SLIDE: thank-you-slide segue

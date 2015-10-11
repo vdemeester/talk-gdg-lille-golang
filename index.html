@@ -2,7 +2,7 @@
 <html>
 <head>
 <title></title>
-<!-- 2015-10-11 Sun 10:42 -->
+<!-- 2015-10-11 Sun 14:39 -->
 <meta  charset="utf-8" />
 <meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
 <meta  name="generator" content="Org-mode with org-ioslide" />
@@ -85,6 +85,182 @@ Présentation rapide
 </article>
 
 </slide>
+<slide id="sec-1-1"  >
+<hgroup class="">
+       <h2 class=" ">En un mot</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-1-1">
+<ul>
+<li>simple
+</li>
+<li>strongly typed
+</li>
+<li>concurrent
+</li>
+<li>compilé
+<ul>
+<li>compilation statique possible <code>\o/</code>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<ul>
+<li>stylistically nice
+<ul>
+<li><i>« les goûts et les couleurs »</i>
+</li>
+</ul>
+</li>
+<li>opiniated
+</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-1-2"  >
+<hgroup class="">
+       <h2 class=" ">En quelques lignes de code (1/4)</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-1-2">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+package main
+
+import "fmt"
+
+func <b>swap(x, y string)</b> (<b>string, string</b>) {
+        for _, elt := range []string{"a", "b"} {
+                fmt.Println(elt)
+        }
+        return y, x
+}
+
+func main() {
+        <b>a, b := swap("hello", "world")</b>
+        fmt.Println(a, b)
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-1-3"  >
+<hgroup class="">
+       <h2 class=" ">En quelques lignes de code (2/4)</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-1-3">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+type Vertex struct {
+        X int
+        Y int
+}
+
+<b>func (v Vertex) PrintCoords()</b> {
+        fmt.Printf("(%s,%s)", v.X, v.Y)
+}
+
+func main() {
+        v := Vertex{1, 2}
+        <b>v.PrintCoords()</b>
+        v.X = 4
+        fmt.Println(v.X)
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-1-4"  >
+<hgroup class="">
+       <h2 class=" ">En quelques lignes de code (3/4)</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-1-4">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+func adder() <b>func(int) int</b> {
+        sum := 0
+        <b>return func(x int) int {
+                sum += x
+                return sum
+        }</b>
+}
+
+func main() {
+        pos, neg := adder(), adder()
+        for i := 0; i &lt; 10; i++ {
+                fmt.Println(<b>pos(i)</b>, <b>neg(-2*i)</b>)
+        }
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-1-5"  >
+<hgroup class="">
+       <h2 class=" ">En quelques lignes de code (4/4)</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-1-5">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+type Abser interface {
+        <b>Abs() float64</b>
+}
+
+type MyFloat float64
+
+<b>func (f MyFloat) Abs() float64</b> {
+        if f &lt; 0 {
+                return float64(-f)
+        }
+        return float64(f)
+}
+
+<b>var f Abser</b>
+// […]
+<b>f.Abs()</b>
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
 </slide>
 <slide id="sec-2" class=" segue dark quote nobackground" style="background-image: url(nil)">
 <aside class="gdbar right bottom"><img src="images/golang-image1.png"></aside><hgroup class="">
@@ -102,27 +278,54 @@ Présentation rapide
 </slide>
 <slide id="sec-2-1"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Learning curve</h2>
+       <h2 class=" ">Learning curve</h2>
        <h3></h3>
        </hgroup>
+<article class="" id="text-2-1">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/learning-curves.png" alt="learning-curves.png" />
+</p>
+</div>
+</article>
+
+
+</article>
 
 </slide>
+
 </slide>
 <slide id="sec-2-2"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Compilation time</h2>
+       <h2 class=" ">Defer</h2>
        <h3></h3>
        </hgroup>
-<article class="smaller" id="text-2-2">
-<p>
-This slide has <code>:ARTICLE:  smaller</code> property, so has <b>smaller</b> content.
-</p>
+<article class="" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="prettyprint" data-lang="org">
-:PROPERTIES:
-:ARTICLE:  smaller
-:END:
+<pre class="prettyprint" data-lang="go">
+<b>src, _ := os.Open(srcName)</b>
+<b>defer src.Close()</b>
+// Doing my stuff […]
+return "something"
+</pre>
+
+</div>
+
+<p>
+<code>defer</code> execution order : Last in, First out (<code>LIFO</code>)
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+func b() {
+    for i := 0; i &lt; 4; i++ {
+        <b>defer fmt.Print(i)</b>
+    }
+}
+// Print 4 3 2 1 0
 </pre>
 
 </div>
@@ -131,46 +334,102 @@ This slide has <code>:ARTICLE:  smaller</code> property, so has <b>smaller</b> c
 </article>
 
 </slide>
+
+
 </slide>
 <slide id="sec-2-3"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Defer</h2>
+       <h2 class=" ">Garbage collection</h2>
        <h3></h3>
        </hgroup>
-<article class="larger" id="text-2-3">
+<article class="" id="text-2-3">
+<blockquote>
 <p>
-This slide has <code>:ARTICLE:  larger</code> property, so has <b>larger</b> content.
+We feel <b>it's critical to eliminate that programmer overhead</b>, and
+advances in garbage collection technology in the last few years give
+us confidence that we can implement it with low enough overhead and no
+significant latency.
 </p>
-<div class="org-src-container">
+</blockquote>
 
-<pre class="prettyprint" data-lang="org">
-:PROPERTIES:
-:ARTICLE:  larger
-:END:
-</pre>
+<article class="flexbox vcenter">
 
+<div class="figure">
+<p><img src="images/golang-gc.png" alt="golang-gc.png" />
+</p>
 </div>
+</article>
 
 
 </article>
 
 </slide>
+
 </slide>
 <slide id="sec-2-4"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Garbage collection</h2>
+       <h2 class=" ">Exports</h2>
        <h3></h3>
        </hgroup>
-<article class="large" id="text-2-4">
+<article class="" id="text-2-4">
 <p>
-This slide has <code>:ARTICLE:  large</code> property, so has <b>large</b> content.
+Variables, constants, methods, structure ont 2 <i>états</i> :
 </p>
+<ul>
+<li>Exportées: <b>CamelCase</b>, visible à l'extérieur du package
+</li>
+<li>Non-exportées: <b>camelCase</b>, invisible à l'extrérieur du package
+</li>
+</ul>
+
 <div class="org-src-container">
 
-<pre class="prettyprint" data-lang="org">
-:PROPERTIES:
-:ARTICLE:  larger
-:END:
+<pre class="prettyprint" data-lang="go">
+func myMethod() string {
+        return "On me voit pas... 😖"
+}
+
+var myVar = "On me voit 😆"
+</pre>
+
+</div>
+
+<p>
+Pas de notion de privé (visible uniquement sur le fichier)
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-2-5"  >
+<hgroup class="">
+       <h2 class=" ">Concurrency</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-2-5">
+<blockquote>
+<p>
+A goroutine is a lightweight thread managed by the Go runtime.
+</p>
+</blockquote>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+func f(from string) {
+        fmt.Println(from, ":", i)
+}
+
+func main() {
+        <b>go f("goroutine")</b>
+        f("direct")
+        <b>go func(msg string)</b> {
+                fmt.Println(msg)
+        }("going")
+}
 </pre>
 
 </div>
@@ -179,56 +438,36 @@ This slide has <code>:ARTICLE:  large</code> property, so has <b>large</b> conte
 </article>
 
 </slide>
-</slide>
-<slide id="sec-2-5"  >
-<hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Exports</h2>
-       <h3></h3>
-       </hgroup>
 
-</slide>
 </slide>
 <slide id="sec-2-6"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Concurrency</h2>
+       <h2 class=" ">Concurrency — channels</h2>
        <h3></h3>
        </hgroup>
-
-</slide>
-</slide>
-<slide id="sec-2-7"  >
-<hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Testing &lt;3</h2>
-       <h3></h3>
-       </hgroup>
-
-</slide>
-</slide>
-<slide id="sec-2-8"  >
-<hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Tooling</h2>
-       <h3></h3>
-       </hgroup>
-
-</slide>
-</slide>
-<slide id="sec-2-9"  >
-<hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Build tags</h2>
-       <h3></h3>
-       </hgroup>
-
-</slide>
-</slide>
-<slide id="sec-2-10"  >
-<hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Et plus si affinité</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-2-10">
+<article class="" id="text-2-6">
+<blockquote>
 <p>
-Cross compilation
+Channels are a typed conduit through which you can send and receive values with the channel operator, <code>&lt;-</code>.
 </p>
+</blockquote>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+waitForMe := make(chan bool)
+
+go func() {
+        fmt.Println("I'm here ! 😙")
+        <b>waitForMe &lt;- true</b>
+}()
+
+fmt.Println("I'm waiting for you… 😒")
+<b>&lt;- waitForMe</b>
+fmt.Println("Finally 🙌")
+</pre>
+
+</div>
 
 
 </article>
@@ -236,6 +475,230 @@ Cross compilation
 </slide>
 
 </slide>
+<slide id="sec-2-7"  >
+<hgroup class="">
+       <h2 class=" ">Concurrency - <code>select</code></h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-2-7">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+done := make(chan error)
+cmd := os.exec("super-long-command", "that", "might", "timeout")
+go func() {
+        // And wait for it to exit in the goroutine :)
+        exitErr := cmd.Wait()
+        <b>done &lt;- exitErr</b>
+}()
+
+<b>select</b> {
+<b>case &lt;-time.After(duration):</b>
+        cmd.Process.Kill()
+        break
+<b>case err = &lt;-done:</b>
+        break
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-2-8"  >
+<hgroup class="">
+       <h2 class=" ">Testing <code>built-in</code> 💖</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-2-8">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+func <b>Test</b>TimeConsuming(<b>t *testing.T</b>) {
+        if testing.Short() {
+                t.Skip("skipping test in short mode.")
+        }
+        // […]
+        t.Fatalf("hello %s", "world")
+}
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="sh">
+$ go test
+PASS
+ok      _/home/vincent/src/docker/docker/pkg/stringutils        0.006s
+$ go test -cover
+PASS
+coverage: 96.5% of statements
+ok      _/home/vincent/src/docker/docker/pkg/stringutils        0.006s
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-2-9"  >
+<hgroup class="">
+       <h2 class=" ">Benchmark testing <code>built-in</code> 💕</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-2-9">
+<p>
+Benchmark tests <code>built-in</code> également
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+func <b>Benchmark</b>Hello(b *testing.B) {
+        for i := 0; i &lt; b.N; i++ {
+                fmt.Sprintf("hello")
+        }
+}
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="sh">
+$ go test -bench=.
+PASS
+BenchmarkHello    10000000    282 ns/op
+ok      github.com/vdemeester/dumb       3.084s
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-2-10"  >
+<hgroup class="">
+       <h2 class=" ">Tooling</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-2-10">
+<ul>
+<li><code>godoc</code> : "extracts and generates documentation for Go programs"
+</li>
+<li><code>vet</code> : "examines Go source code and reports suspicious constructs"
+</li>
+<li><code>oracle</code> : "source analysis tool that answers questions about Go programs"
+</li>
+<li><code>golint</code> : "prints out style mistakes, is concerned with coding style"
+</li>
+<li><code>gofmt</code> : "reformats Go source code"
+</li>
+<li><code>generate</code> : "scanning for special comments in Go source code that identify general commands to run"
+</li>
+<li><code>gorename</code> : "performs precise type-safe renaming of identifiers"
+</li>
+<li><code>-race</code> &amp; <code>racy</code> : "race detector"
+</li>
+</ul>
+
+
+<ul>
+<li>et plus encore : <code>godef</code>, <code>gocode</code>, <code>impl</code>, …
+</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-2-11"  >
+<hgroup class="">
+       <h2 class=" ">Compilation</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-2-11">
+<ul>
+<li>Compilation time
+</li>
+<li>Cross compilation ( &gt;= 1.5 )
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="sh">
+env GOOS=linux GOARCH=arm go build -v github.com/constabulary/gb/cmd/gb
+</pre>
+
+</div>
+
+<ul>
+<li>Compilation flags
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+// +build !windows
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-2-12"  >
+<hgroup class="">
+       <h2 class=" ">Et plus si affinité</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-2-12">
+<ul>
+<li>imports
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+import (
+        // build-in
+        "string"
+        "testing"
+
+        // fully-qualified
+        "github.com/foo/bar"
+        biz "mysuperdomain.io/foo/baz"
+)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
 
 </slide>
 <slide id="sec-3" class=" segue dark quote nobackground" style="background-image: url(nil)">
@@ -254,52 +717,161 @@ Cross compilation
 </slide>
 <slide id="sec-3-1"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Generics</h2>
+       <h2 class=" ">Generics</h2>
        <h3></h3>
        </hgroup>
 <article class="" id="text-3-1">
 <p>
-Interface are enough
+Golang ne dispose pas de <i>generics</i>.
 </p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="java">
+public class MyGenericObject&lt;T extends Serializable&gt; {
+    // […]
+}
+
+new MyGenericObject&lt;String&gt;();
+new MyGenericObject&lt;ASeriailzableObject&gt;();
+</pre>
+
+</div>
+
+<ul>
+<li><i>« Interface are enough »</i>
+</li>
+<li><code>generate</code> peut permettre de <i>mimics</i> les generics
+</li>
+</ul>
 
 
 </article>
 
 </slide>
+
+
 </slide>
 <slide id="sec-3-2"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Debugging</h2>
+       <h2 class=" ">Debugging</h2>
        <h3></h3>
        </hgroup>
+<article class="larger" id="text-3-2">
+
+<ul>
+<li>Pas d'outils <code>built-in</code>
+</li>
+<li>Outils qui <i>marchotte</i>
+<ul>
+<li><code>gdb</code> le vénérable
+</li>
+<li><code>delve</code> le nouveau (<a href="https://github.com/derekparker/delve">github</a>)
+</li>
+</ul>
+</li>
+</ul>
+
+
+<ul>
+<li>Idées : <i>« You don't really need to debug if you log enough »</i>
+</li>
+</ul>
+
+
+</article>
 
 </slide>
+
+
 </slide>
 <slide id="sec-3-3"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Exceptions</h2>
+       <h2 class=" ">Exceptions</h2>
        <h3></h3>
        </hgroup>
+<article class="" id="text-3-3">
+<blockquote>
+<p>
+Go solves the exception problem by not having exceptions.
+</p>
+</blockquote>
+
+<ul>
+<li><code>error</code> indicates to the caller that this method could go wrong
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+// a whole lot of "err" in returns (to handle or ignore in the caller)
+func Open(name string) (file *File, err error)
+</pre>
+
+</div>
+
+<ul>
+<li><code>panic</code> always fatal to your program […] you never assume that your
+caller can solve the problem ; <code>recover</code> regains control of a
+panicking goroutine.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+panic("inconceivable")
+</pre>
+
+</div>
+
+
+</article>
 
 </slide>
+
 </slide>
 <slide id="sec-3-4"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Lint</h2>
+       <h2 class=" ">Lint — Opiniated, <i>maybe too much</i> ?</h2>
        <h3></h3>
        </hgroup>
+<article class="" id="text-3-4">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+// Doesn't pass golint
+type a<b>Dns</b> struct{
+        <b>Id</b> int
+}
+
+// Passes golint
+type a<b>DNS</b> struct{
+        <b>ID</b> int `json:"Id"`
+}
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+<b>// IDoWhatMyNameSays does what's his name says …</b>
+func IDoWhatMyNameSays(input string) string {
+        // […]
+}
+</pre>
+
+</div>
+
+
+</article>
 
 </slide>
-</slide>
-<slide id="sec-3-5"  >
-<hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> iota ?</h2>
-       <h3></h3>
-       </hgroup>
 
 </slide>
 
-</slide>
 </slide>
 <slide id="sec-4" class=" segue dark quote nobackground" style="background-image: url(nil)">
 <aside class="gdbar right bottom"><img src="images/golang-image1.png"></aside><hgroup class="">
@@ -317,29 +889,172 @@ Interface are enough
 </slide>
 <slide id="sec-4-1"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Operateurs</h2>
+       <h2 class=" ">Named returns</h2>
        <h3></h3>
        </hgroup>
+<article class="" id="text-4-1">
+<blockquote>
+<p>
+variable shadowing on return parameters is sooo easy to get wrong.
+</p>
+</blockquote>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+func pullImageIfNotExist(image string) (<b>err error</b>) {
+        if <b>err := imageExists(image)</b>; err != nil {
+                pullCmd := exec.Command(dockerBinary, "pull", image)
+                _, exitCode, <b>err := runCommandWithOutput(pullCmd)</b>
+
+
+                if <b>err != nil</b> || exitCode != 0 {
+                        <b>err = fmt.Errorf("image %q wasn't found locally and it couldn't be pulled: %s", image, err)</b>
+                }
+        }
+        return
+}
+</pre>
+
+</div>
+
+
+</article>
 
 </slide>
+
 </slide>
 <slide id="sec-4-2"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Immutability</h2>
+       <h2 class=" ">Immutability</h2>
        <h3></h3>
        </hgroup>
+<article class="" id="text-4-2">
+<ul>
+<li><i>presque</i> tout est mutable
+</li>
+<li>pas de <code>built-in</code> pour dire « hey, ce truc est immutable »
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="go">
+func main() {
+        a := []string{"a", "b", "c", "d"}
+        b := a[:3] // ["b", "c", "d"]
+        c := append(b, "lol")
+        d := append(b, "woot")
+        fmt.Println(c) // [a b c woot]
+        fmt.Println(d) // [a b c woot]
+}
+</pre>
+
+</div>
+
+<blockquote>
+<p>
+Laisse pas traîner ton fils… Si tu veux pas qu'il glisse…
+</p>
+</blockquote>
+
+
+</article>
 
 </slide>
+
 </slide>
 <slide id="sec-4-3"  >
 <hgroup class="">
-       <h2 class=" "><span class="todo TODO">TODO</span> Vendoring</h2>
+       <h2 class=" ">Dependencies versions …</h2>
        <h3></h3>
        </hgroup>
+<article class="" id="text-4-3">
+<ul>
+<li><code>go get</code> is cool but… 
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="sh">
+$ go get -u github.com/docker/libkv
+# git commit : 2cae37b
+# […] Few days later
+$ go get -u github.com/docker/libkv
+# git  commit : 253a9ef
+$ go build ./...
+# oh noooeees it's broken 😱
+</pre>
+
+</div>
+
+<blockquote>
+<p>
+"I want to have reproducible builds on different computers at
+different times. This is currently problematic; let's make things
+better."
+</p>
+
+<p>
+<span class='alignright'>&#x2013; David Hinkes, Go+</span><br  />
+</p>
+</blockquote>
+
+
+</article>
 
 </slide>
 
 </slide>
+<slide id="sec-4-4"  >
+<hgroup class="">
+       <h2 class=" ">… to Vendoring</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-4-4">
+<blockquote>
+<p>
+"If you're using an externally supplied package and worry that it
+might change in unexpected ways, the simplest solution is to copy it
+to your local repository. (<b>This is the approach Google takes
+internally.</b>) […]"
+</p>
+
+<p>
+<span class='alignright'>&#x2013; Go FAQ</span><br  />
+</p>
+</blockquote>
+
+<ul>
+<li>Tools
+<ul>
+<li><code>godep</code> (<b>Don't use it without vendoring.. <i>it's hell on earth</i></b>)
+</li>
+<li><code>glide</code>, <code>gb</code>, <code>name yours</code>, shell scripts, …
+</li>
+</ul>
+</li>
+<li>Go 1.5 experimental vendoring : <code>export GO15VENDOREXPERIMENT=1</code>
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="sh">
+$ ls vendor/src
+github.com/ golang.org/
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
 </slide>
 <slide id="sec-5" class=" thank-you-slide segue nobackground" style="background-image: url(nil)">
 <aside class="gdbar right"><img src="images/golang-image1.png"></aside><article class="flexbox vleft auto-fadein" id="text-5">
