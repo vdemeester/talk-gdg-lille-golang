@@ -1,0 +1,145 @@
+#+TITLE: Golang
+#+SUBTITLE: Le bon, la brute et le truant
+#+DATE: 2015/10/15
+#+AUTHOR: vdemeester
+#+EMAIL: vincent@sbr.pm
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:nil p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+#+CREATOR: Emacs 24.4.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: fr
+#+SELECT_TAGS: export
+
+#+COMPANY: Zenika
+#+WWW: http://vincent.demeester.fr/
+#+GITHUB: http://github.com/vdemeester
+#+TWITTER: vdemeest
+
+#+FAVICON: images/golang.ico
+#+ICON: images/golang-image1.png
+#+HASHTAG: #gdglille-golang
+
+** /Whoami
+
+#+BEGIN_HTML
+<span style="text-align: right;float:right; display: block; width: 50%;">Docker maintainer<br/>certified trainer<br><span style="font-size: 2em;">🐳</span></span>
+#+END_HTML
+
+#+NAME:   fig:me-contribs-fun
+[[./images/me-contribs-fun.png]]
+
+
+- I'm a developer, devops, craftsman — /I 💓 & work @Zenika/
+- I 💓 GNU/Linux, Docker & GNU/Emacs
+- I 💓 Free-software !
+- I 💓 Java, *Go*, Python and much more
+- And I 💓 unicode, 🚴 & 🚶
+
+* Golang 🐹
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+  Présentation rapide
+* Le bon 😆
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+#+BEGIN_HTML
+<code style="background: inherit; color: inherit;">｡◕‿◕｡</code>
+#+END_HTML
+« The good »
+** TODO Learning curve
+** TODO Compilation time
+  :PROPERTIES:
+  :ARTICLE:  smaller
+  :END:
+This slide has =:ARTICLE:  smaller= property, so has *smaller* content.
+#+BEGIN_SRC org
+  :PROPERTIES:
+  :ARTICLE:  smaller
+  :END:
+#+END_SRC
+** TODO Defer
+  :PROPERTIES:
+  :ARTICLE:  larger
+  :END:
+This slide has =:ARTICLE:  larger= property, so has *larger* content.
+#+BEGIN_SRC org
+  :PROPERTIES:
+  :ARTICLE:  larger
+  :END:
+#+END_SRC
+** TODO Garbage collection
+  :PROPERTIES:
+  :ARTICLE:  large
+  :END:
+This slide has =:ARTICLE:  large= property, so has *large* content.
+#+BEGIN_SRC org
+  :PROPERTIES:
+  :ARTICLE:  larger
+  :END:
+#+END_SRC
+** TODO Exports
+** TODO Concurrency
+** TODO Testing <3
+** TODO Tooling
+** TODO Build tags
+** TODO Et plus si affinité
+   Cross compilation
+
+* La brute 😓
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+#+BEGIN_HTML
+<code style="background: inherit; color: inherit;">¯\_(ツ)_/¯</code>
+#+END_HTML
+« The bad »
+** TODO Generics
+   Interface are enough
+** TODO Debugging
+** TODO Exceptions
+** TODO Lint
+** TODO iota ?
+* Le truant 😨
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+#+BEGIN_HTML
+<code style="background: inherit; color: inherit;">ヾ(×× ) ﾂ</code>
+#+END_HTML
+« The ugly »
+** TODO Operateurs
+** TODO Immutability
+** TODO Vendoring
+* Thank You 🐸
+
+:PROPERTIES:
+:SLIDE: thank-you-slide segue
+:ASIDE: right
+:ARTICLE: flexbox vleft auto-fadein
+:END:
+
+* Footnotes
+
+[fn:1] Footnote is in here!
+
+* Notes                                                                         :noexport:
+- http://blog.carlsensei.com/post/42828735125
+- https://news.ycombinator.com/item?id=7668567
+- https://www.scriptrock.com/blog/our-experience-with-golang
+- https://github.com/golang/go/wiki/Iota
+- https://www.youtube.com/watch?v=eKAg1DtC9jY
+- https://docs.google.com/presentation/d/1dRFLEtwmdoBSjj-WWe3CUAbyOkaQIUPonTN8_3GLkso/edit#slide=id.p4
