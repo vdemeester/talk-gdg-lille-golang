@@ -473,7 +473,7 @@ variable shadowing on return parameters is sooo easy to get wrong.
 #+BEGIN_SRC go
   func main() {
           a := []string{"a", "b", "c", "d"}
-          b := a[:3] // ["b", "c", "d"]
+          b := a[:3] // ["a", "b", "c"]
           c := append(b, "lol")
           d := append(b, "woot")
           fmt.Println(c) // [a b c woot]
